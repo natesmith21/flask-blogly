@@ -8,7 +8,7 @@ def connect_db(app):
 
 """Models for Blogly."""
 
-class Users(db.Model):
+class User(db.Model):
 
     __tablename__= 'users'
 
@@ -24,4 +24,12 @@ class Users(db.Model):
     last_name = db.Column(db.String)
 
     image_url = db.Column(db.String)
+
+    def get_full_name(self):
+
+        full_name = f'{self.first_name} {self.last_name}'
+
+        return full_name
+    
+
 

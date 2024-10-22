@@ -1,0 +1,15 @@
+body{
+    margin: 15px;
+}
+
+.btn{
+    background-color: blue;
+}
+
+.btn a {
+    color: white;
+}
+
+footer{
+    margin-top:10px;
+}
