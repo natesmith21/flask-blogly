@@ -31,5 +31,33 @@ class User(db.Model):
 
         return full_name
     
+class Post(db.Model):
+
+    __tablename__= 'posts'
+
+    id = db.Column(db.Integer, 
+                primary_key=True,
+                autoincrement=True
+                )
+
+    title = db.Column(db.String, 
+                      nullable=False
+                      )
+
+    content = db.Column(db.String,
+                         nullable=False
+                         )
+    
+    created_at = db.Column(db.DateTime, 
+                           nullable=False,)
+                        #    default = now()) #go import datetime from python and figure out how to use that 
+    user_id = db.Column(db.Integer, 
+                        db.ForeignKey('users.id'))
+    
+    user = db.relationship('User', backref='users')
+
+    
+    
+
 
 

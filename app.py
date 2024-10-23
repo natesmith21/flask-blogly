@@ -28,11 +28,11 @@ def list_users():
     """shows list of all users - home page"""
 
     all_users = User.query.all()
-    return render_template('list.html', users=all_users)
+    return render_template('users/list.html', users=all_users)
 
 @app.route('/users/new')
 def show_add_form():
-    return render_template('new_user_form.html')
+    return render_template('users/new.html')
 
 @app.route('/users/new', methods=['POST'])
 def add_new_user():
@@ -51,7 +51,7 @@ def show_user(user_id):
     """show details about a single user"""
 
     user = User.query.get_or_404(user_id)
-    return render_template('details.html', user=user)
+    return render_template('users/details.html', user=user)
 
 
 @app.route('/users/<int:user_id>/edit')
@@ -59,7 +59,7 @@ def show_edit_page(user_id):
     """shows the edit users page"""
 
     user = User.query.get_or_404(user_id)
-    return render_template('edit_user_form.html', user=user)
+    return render_template('users/edit.html', user=user)
 
 @app.route('/users/<int:user_id>/edit', methods=['POST'])
 def edit_user(user_id):
@@ -82,10 +82,11 @@ def edit_user(user_id):
 
     return redirect(f'/users/{user.id}')
 
-@app.route('/users/<int:user_id>/delete')
+@app.route('/users/<int:user_id>/delete', methods=['POST'])
 def delete_user(user_id):
 
-    User.query.filter_by(id=user_id).delete()
+    user = User.query.get_or_404(user_id)
+    db.session.delete(user)
     db.session.commit()
 
     return redirect('/')
