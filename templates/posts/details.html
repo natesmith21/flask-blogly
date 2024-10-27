@@ -10,6 +10,11 @@
             <p>
                 {{post.content}}
             </p>
+        {% if tags %}
+           {%for tag in tags%}
+            <div class="btn btn-sm">{{tag.name}}</div>
+           {% endfor %}
+        {% endif %}
             <form>
                 <button class="btn btn-light btn-sm"
                         formaction="/users/{{post.user.id}}"

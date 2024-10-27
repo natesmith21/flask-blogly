@@ -1,4 +1,4 @@
-from models import Post, User, db
+from models import Post, User, db, Tag, PostTag
 from app import app 
 
 db.drop_all()
@@ -13,10 +13,22 @@ post3 = Post(title='Chicken Parmigiana', content='<insert recipe>', user_id=1)
 smart_post = Post(title='Smart Post', content='E=MC^2', user_id=2)
 post4 = Post(title='Coffee', content='My favorite coffee is from Daily Dose', user_id=2)
 
+tag1 = Tag(name='cool')
+tag2 = Tag(name='cringe')
+tag3 = Tag(name='food')
+
+post_tag = PostTag(post_id= 1, tag_id=2)
+
+
 db.session.add_all([u1,u2])
 db.session.commit()
 
 db.session.add_all([dumb_post, smart_post, post3, post4])
+db.session.add_all([tag1, tag2, tag3])
 db.session.commit()
+
+db.session.add(post_tag)
+db.session.commit()
+
 
 
